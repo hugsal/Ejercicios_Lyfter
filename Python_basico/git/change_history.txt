@@ -1,0 +1,20 @@
+commit 69c665ed6cd69fafba9e599845802d0a663c704d (origin/main, origin/HEAD, main)
+Author: hugsal <60677872+hugsal@users.noreply.github.com>
+Date:   Mon Jun 8 14:41:20 2026 -0600
+
+    Initial commit
+
+Que se hizo? Se crea el repo y se agrego solo el README
+Porque? Para iniciar el versionamiento de los trabajos realizados
+
+#######################################################################################
+
+commit 07f8ba19ddbaf158de92361de305f7d2bd17f890 (HEAD -> past-exercises, origin/past-exercises)
+Author: hugsSalazar <hugs.salazar@gmail.com>
+Date:   Mon Jun 8 14:57:34 2026 -0600
+
+    add exercise from past modules
+
+
+Que se hizo? Se agregaron todos los ejercicios de los modulos pasados
+Porque? Para agregarlos al repo y tener el historial de ejercicios realizados
