@@ -1,0 +1,13 @@
+Inicio
+Definir primero
+Definir segundo
+Mostar “Ingresa un numero”
+Pedir primero
+Mostrar “Ingresa otro numero diferente”
+Pedir segundo
+Si (primero < segundo) entonces:
+	Mostrar “A: ” + primero + “, B: ” + segundo
+Sino
+	Mostrar “A: ” + segundo + “, B: ” + primero
+FinSi
+Fin

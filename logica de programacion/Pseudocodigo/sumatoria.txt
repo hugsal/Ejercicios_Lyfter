@@ -1,0 +1,16 @@
+Sumatoria
+
+Inicio
+Definir limite
+Definir iteración
+Definir suma
+iteración =1
+Suma = 0
+Mostrar “Ingrese un numero mayor a 0”
+Pedir limite
+Mientras que (iteración <= limite) repetir:
+	suma = suma + iteración
+	iteración = iteración + 1
+FinMientras
+Mostrar suma
+Fin

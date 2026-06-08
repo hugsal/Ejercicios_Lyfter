@@ -1,0 +1,29 @@
+Ver videos en YouTube 1.0
+
+1. Encender el dispositivo
+2. Abrir un navegador
+3. Escribir en la barra de navegacion https://www.youtube.com/
+4. Reproducir video
+5. Fin
+
+Ver videos en YouTube 1.1
+
+1. Encender el dispositivo
+2. Si tiene conexión a internet
+	1. Abrir un navegador
+	2. Escribir en la barra de navegacion https://www.youtube.com/
+	3. Reproducir video
+3. Fin
+
+Ver videos en YouTube 1.2
+
+1. Encender el dispositivo
+2. Si tiene conexión a internet
+	1. Si es un dispositivo movil
+		a.Abrir la app YouTube
+		b. Reproducir video
+	2. Si no
+		a. Abrir un navegador
+		b. Escribir en la barra de navegacion https://www.youtube.com/
+		c. Reproducir video
+3. Fin
