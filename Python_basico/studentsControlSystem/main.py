@@ -35,26 +35,8 @@ def execute(option, students, assignments, is_exported_flag):
 
 
 def main():
-    # students = []
+    students = []
     assignments = ["social", "science", "spanish", "english"]
-    is_exported_flag = False
-    students = [
-        {
-            "name": "hugo salazar",
-            "section": "12L",
-            "notes": {"social": 67, "science": 59, "spanish": 90, "english": 34},
-        },
-        {
-            "name": "javier lopez",
-            "section": "12B",
-            "notes": {"social": 45, "science": 78, "spanish": 90, "english": 98},
-        },
-        {
-            "name": "maria garcia",
-            "section": "34L",
-            "notes": {"social": 90, "science": 90, "spanish": 95, "english": 98},
-        },
-    ]
 
     while True:
         try:
