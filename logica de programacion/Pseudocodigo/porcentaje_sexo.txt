@@ -1,0 +1,29 @@
+Inicio
+Definir limite
+Definir hombres
+Definir mujeres
+Definir contador
+Definir sexo
+Definir promedio_hombres
+Definir promedio_mujeres
+limite = 6
+hombres = 0
+mujeres = 0
+contador = 1
+promedio_hombres = 0
+promedio_mujeres = 0
+Mostrar “Ingrese el sexo de 6 personas”
+Mientras que (contador <= limite) repetir:
+	Mostrar “Sexo de la persona:” + contador + “(1: femenino, 2: masculino)”
+	Pedir sexo
+	Si (sexo == 1)
+		mujeres = mujeres +1
+	Sino
+		hombres = hombres +1
+	FinSi
+	contador = contador + 1
+FinMientras
+promedio_hombres = (hombres / limite) * 100 
+promedio_mujeres = (mujeres / limite) * 100
+Mostrar promedio_mujeres + “% mujeres y ” + promedio_hombres + “% hombres”
+Fin

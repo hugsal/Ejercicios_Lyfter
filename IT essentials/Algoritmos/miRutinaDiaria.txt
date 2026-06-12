@@ -1,0 +1,33 @@
+Mi rutina diaria 1.0
+
+1 Si es dia habil
+	1. Despertar antes de las 6 am
+2. Lavar dientes
+3 Si es dia habil
+	1. Llevar hijas a la escuela
+	2. Revisar horario de juntas del dia
+4. Hacer ejerció	
+5. Desayunar
+6. Si es dia habil
+	1. Mientras haya tareas pendientes
+		a. Resolver pendientes
+7. Si no
+	1 Realizar actividades recreativas
+8 Si es dia habil
+	1. Recoger hijas de la escuela
+9. Comer
+10. Lavar dientes
+11. Tomar un descanso
+12. Si es dia habil
+	1. Mientras haya tareas pendientes
+		a. Resolver pendientes
+13. Si no
+	1 Realizar actividades recreativas
+14. Si es Martes
+	1. Ir al padel
+15. Si no, si es jueves
+	1. Ir por promo de alitas con mis hijas
+16. Si no es jueves
+	1. Cenar
+17. Lavar dientes
+18. Dormir

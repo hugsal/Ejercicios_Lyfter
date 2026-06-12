@@ -1,0 +1,19 @@
+Inicio
+Definir tiempo
+Definir 10_min_en_segundos
+Definir faltante
+10_min_en_segundos = 600
+Faltante = 0
+Mostrar “Introduzca una cantidad de tiempo en segundos”
+Pedir tiempo
+Si (tiempo == 10_min_en_segundos) entonces:
+	Mostrar “Igual”
+Sino
+	Si (tiempo > 10_min_en_segundos) entonces:
+		Mostrar “Mayor”
+	Sino
+		faltante = 10_min_en_segundos - tiempo
+		Mostrar faltante
+	FinSi
+FinSi
+Fin

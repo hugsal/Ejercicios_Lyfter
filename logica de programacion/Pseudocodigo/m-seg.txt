@@ -1,0 +1,8 @@
+Inicio
+Definir velocidad_km_hr
+Definir velocidad_m_s
+Mostrar “Ingrese una velocidad en km/hr”
+Pedir velocidad_km_hr
+velocidad_m_s = velocidad_km_hr / 3.6
+Mostrar velocidad_m_s
+Fin
