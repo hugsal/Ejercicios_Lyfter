@@ -36,24 +36,7 @@ def execute(option, students, assignments, is_exported_flag):
 
 
 def main():
-    # students = []
-    students = [
-        Student(
-            "hugo salazar",
-            "45T",
-            {"social": 89, "science": 67, "spanish": 45, "english": 67},
-        ),
-        Student(
-            "maria belem",
-            "67U",
-            {"social": 90, "science": 98, "spanish": 89, "english": 90},
-        ),
-        Student(
-            "javier ayala",
-            "78I",
-            {"social": 89, "science": 12, "spanish": 89, "english": 67},
-        ),
-    ]
+    students = []
     assignments = ["social", "science", "spanish", "english"]
     is_exported_flag = False
 
