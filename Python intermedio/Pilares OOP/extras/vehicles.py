@@ -3,7 +3,7 @@ class Vehicle:
         self._brand = brand
         self._year = year
 
-    def get_info():
+    def get_info(self):
         print(f"{self._brand} ({self._year})")
 
 
