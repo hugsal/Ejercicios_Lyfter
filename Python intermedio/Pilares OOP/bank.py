@@ -16,13 +16,16 @@ class SavingsAccount(BankAccount):
 
     def withdraw(self, amount):
         if self.balance - amount < self.min_balance:
-            print("This transaction exceeds the minimum amount")
+            raise ValueError("This transaction exceeds the minimum amount")
         else:
             super().withdraw(amount)
 
 
 account = SavingsAccount(500)
 account.deposit(1000)
-account.withdraw(400)
-account.withdraw(300)
-print(account.balance)
+try:
+    account.withdraw(400)
+    account.withdraw(300)
+    print(account.balance)
+except ValueError as ex:
+    print(ex)
