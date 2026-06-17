@@ -23,11 +23,11 @@ class Employee:
         self.__salary = salary
 
     def promote(self, percentage):
-        self.__salary *= 1 + percentage / 100
+        self.__salary *= 1 + percentage
 
 
 employee = Employee("Hugo", 1000)
-employee.promote(10)
+employee.promote(0.1)
 print(employee.name)
 print(employee.salary)
 

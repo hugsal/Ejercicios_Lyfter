@@ -26,7 +26,7 @@ class AdminUser(User):
 
 
 class RegularUser(User):
-    permissions = "read"
+    permissions = ("read",)
 
     def get_role(self):
         print("Regular")
