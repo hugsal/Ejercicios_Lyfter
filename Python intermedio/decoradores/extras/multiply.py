@@ -6,7 +6,7 @@ def log_call(func):
         number1 = args[0]
         number2 = args[1]
         print(
-            f"Func: {func.__name__} - args: {args} - [{datetime.today()}] - Resultado {number1 * number2}"
+            f"Func: {func.__name__} - args: {", ".join(map(str, args))} - [{datetime.today()}] - Resultado {number1 * number2}"
         )
 
         func(*args)
@@ -17,7 +17,7 @@ def log_call(func):
 def validate_numbers(func):
     def wrapper(*args):
         for arg in args:
-            if not isinstance(arg, int):
+            if not isinstance(arg, (int, float)):
                 raise ValueError("The values is not int")
 
         func(*args)
@@ -33,7 +33,7 @@ def multiply(number1, number2):
 
 def main():
     try:
-        multiply(4, "H")
+        multiply(4, 5.5)
     except ValueError as ex:
         print(ex)
 
