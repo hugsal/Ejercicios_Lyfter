@@ -8,7 +8,11 @@ class User:
     @property
     def age(self):
         today = date.today()
-        return today.year - self.date_of_birth.year
+        not_yet_birthday = (today.month, today.day) < (
+            self.date_of_birth.month,
+            self.date_of_birth.day,
+        )
+        return today.year - self.date_of_birth.year - not_yet_birthday
 
 
 def is_adult(func):
