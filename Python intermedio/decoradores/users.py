@@ -22,7 +22,7 @@ def is_adult(func):
         if user.age < 18:
             raise PermissionError("You're not an adult")
 
-        func(args)
+        func(*args)
 
     return wrapper
 

@@ -3,7 +3,7 @@ def int_validator(func):
         for arg in args:
             if not isinstance(arg, int):
                 raise ValueError(f"{arg} is not an int")
-        func(args)
+        func(*args)
 
     return wrapper
 
