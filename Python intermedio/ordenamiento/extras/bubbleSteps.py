@@ -3,19 +3,19 @@ def bubble_sort_steps(unordered_list):
     iterations = 0
     changes = 0
     for iteration in range(0, len(new_list) - 1):
-        has_Changes = False
+        has_changes = False
         for index in range(0, len(new_list) - iteration - 1):
             current = new_list[index]
             next = new_list[index + 1]
             if current > next:
                 new_list[index] = next
                 new_list[index + 1] = current
-                has_Changes = True
+                has_changes = True
                 changes += 1
 
-        if not has_Changes:
-            break
         iterations += 1
+        if not has_changes:
+            break
 
     return {"new_list": new_list, "iterations": iterations, "changes": changes}
 
