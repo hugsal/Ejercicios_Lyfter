@@ -35,6 +35,7 @@ main()
 
 # ¿En qué condiciones conviene usar cada uno?
 # linear_search conviene usarlo cuando la lista no esta ordenada o cuando la lista es muy pequena.
+# binary_search conviene usarlo cuando la lista esta ordenada y es grande.
 
 # ¿Qué pasa si la lista no está ordenada?
-# binary_search no funciona
+# binary_search arroja resultados erroneos (falsos negativos).

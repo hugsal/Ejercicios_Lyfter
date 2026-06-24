@@ -1,6 +1,6 @@
 def print_all_pairs(my_dict):
     for key1 in my_dict:  # O(n)
-        for key2 in my_dict:  # O(n^2)
+        for key2 in my_dict:  # O(n)
             print(f"{key1}-{key2}")  # O(1)
 
 
