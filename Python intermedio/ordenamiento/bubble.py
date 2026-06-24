@@ -1,16 +1,16 @@
 def bubble_sort(unordered_list):
     new_list = unordered_list.copy()
     for iteration in range(0, len(new_list) - 1):
-        has_Changes = False
+        has_changes = False
         for index in range(0, len(new_list) - iteration - 1):
             current = new_list[index]
             next = new_list[index + 1]
             if current > next:
                 new_list[index] = next
                 new_list[index + 1] = current
-                has_Changes = True
+                has_changes = True
 
-        if not has_Changes:
+        if not has_changes:
             break
 
     return new_list
