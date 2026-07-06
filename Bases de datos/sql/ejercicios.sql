@@ -30,7 +30,7 @@ id INTEGER PRIMARY KEY AUTOINCREMENT,
 invoice_number SMALLINT NOT NULL,
 purchase_date TEXT DEFAULT (DATETIME('now')),
 total_amount REAL NOT NULL,
-fk_user_id VARCHAR(30) NOT NULL REFERENCES user(id),
+fk_user_id INT NOT NULL REFERENCES user(id),
 fk_payment_method_id INT NOT NULL REFERENCES payment_method(id)
 );
 
@@ -53,7 +53,7 @@ fk_product_id INT NOT NULL REFERENCES product(id)
 
 CREATE table shopping_cart(
 id INTEGER PRIMARY KEY AUTOINCREMENT,
-fk_user_id VARCHAR(30) NOT NULL REFERENCES user(id)
+fk_user_id INT NOT NULL REFERENCES user(id)
 );
 
 CREATE TABLE products_shopping_cart (
