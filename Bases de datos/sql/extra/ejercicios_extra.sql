@@ -163,5 +163,6 @@ SELECT * FROM product WHERE price > 50000;
 SELECT * FROM product WHERE name LIKE '%apple%';
 SELECT * FROM product ORDER BY price DESC LIMIT 5;
 UPDATE product SET stock_available = 0 WHERE price <= 0;
-UPDATE product SET price = (SELECT SUM(100 + price) FROM product WHERE stock_available < 10) WHERE stock_available < 10;
-UPDATE product SET stock_available = (SELECT  SUM(stock_available - 1) FROM product WHERE  id = 1) WHERE id = 1;
+UPDATE product SET price = price + 100 WHERE stock_available < 10;
+UPDATE product SET stock_available = stock_available - 1 WHERE id = 1;
+SELECT * FROM product ORDER BY id ASC LIMIT 10
