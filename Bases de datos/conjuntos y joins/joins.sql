@@ -61,17 +61,17 @@ VALUES
 	
 SELECT b.id, b.name as book, a.name as author
 FROM book b
-INNER JOIN author a ON b.fk_author_id = a.id;
+LEFT JOIN author a ON b.fk_author_id = a.id;
 
-SELECT b.id, b.name as book
+SELECT b.id, b.name AS book
 FROM book b
 LEFT JOIN author a ON b.fk_author_id = a.id
-WHERE a.name IS NULL;
+WHERE a.id IS NULL;
 
 SELECT a.id, a.name as author
 FROM book b
 RIGHT JOIN author a ON b.fk_author_id = a.id
-WHERE b.name IS NULL;
+WHERE b.id IS NULL;
 
 SELECT DISTINCT b.id, b.name
 from book b 
