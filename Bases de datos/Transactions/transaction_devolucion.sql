@@ -62,46 +62,59 @@ UPDATE bill
     
     
 DO $$
-DECLARE	
+DECLARE 
     -- Definimos variables para almacenar datos durante la ejecución
-    v_product_id INTEGER;
-    v_record RECORD;
+    v_bill_number_to_return INTEGER := 6548; -- Variable para hacer el número de factura dinámico
     v_bill_id INTEGER;
+    v_bill_status VARCHAR(20);
+    v_record RECORD;
+    v_rows_affected INTEGER := 0;
     
 BEGIN
-    -- 1. Validar Factura
-    
-    SELECT id INTO v_bill_id
+    -- 1. Validar Factura y obtener su estado actual
+    SELECT id, status INTO v_bill_id, v_bill_status
     FROM bill
-    WHERE bill_number = 2712;
+    WHERE bill_number = v_bill_number_to_return;
     
     IF v_bill_id IS NULL THEN
-      RAISE EXCEPTION 'Factura no encontrada. Abortando transacción.';
+      RAISE EXCEPTION 'Factura N° % no encontrada. Abortando transacción.', v_bill_number_to_return;
+    END IF;
+    
+    IF v_bill_status = 'Retornada' THEN
+      RAISE EXCEPTION 'La factura N° % ya fue retornada previamente. Abortando transacción.', v_bill_number_to_return;
     END IF;
     
     -- 2. Obtener productos a devolver
-    
-	FOR v_record IN
-    SELECT fk_product_id, quantity
-    FROM products_bill
-    WHERE id = v_bill_id
-    
+    FOR v_record IN
+        SELECT fk_product_id, quantity
+        FROM products_bill
+        WHERE fk_bill_id = v_bill_id
     LOOP
-        RAISE NOTICE 'Procesando Producto ID: %, Cantidad a retornar: %', v_record.fk_product_id, v_record.quantity;
-        
-        -- Si el producto o la cantidad son nulos, saltamos para evitar errores en el WHERE
         IF v_record.fk_product_id IS NOT NULL AND v_record.quantity IS NOT NULL THEN
+            RAISE NOTICE 'Procesando Producto ID: %, Cantidad a retornar: %', v_record.fk_product_id, v_record.quantity;
+            
+            -- 3. Devolver el stock al producto
             UPDATE product
             SET stock_available = stock_available + v_record.quantity
             WHERE id = v_record.fk_product_id;
+            
+            v_rows_affected := v_rows_affected + 1;
         END IF;
     END LOOP;
+
+    IF v_rows_affected = 0 THEN
+        RAISE NOTICE 'Advertencia: La factura no contenía productos en su detalle.';
+    END IF;
     
-   -- 4. Cambiar status de factura
-   
-   	UPDATE bill
+    -- 4. Cambiar estatus de la factura
+    UPDATE bill
     SET status = 'Retornada'
     WHERE id = v_bill_id;
-   	
-    RAISE NOTICE 'Transacción finalizada.';
+    
+    RAISE NOTICE 'Transacción finalizada con éxito. Factura N° % marcada como Retornada.', v_bill_number_to_return;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE NOTICE 'Transacción abortada debido a un error: %', SQLERRM;
+        RAISE;
 END $$;
