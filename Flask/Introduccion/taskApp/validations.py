@@ -13,23 +13,40 @@ def validate_id(tasks, id):
         abort(400, "El identificador ya existe")
 
 
-def validate_data(task):
+def validate_status(status):
     task_status = ("Por Hacer", "En Progreso", "Completada")
 
-    tittle = task.get("titulo", None).strip()
-    description = task.get("descripcion", None).strip()
-    status = task.get("estado", None).strip()
+    normalized_status = status.title()
+    if normalized_status not in task_status:
+        abort(400, "El estado es invalido")
 
-    if not tittle:
+
+def validate_type(value, field):
+    if isinstance(value, str):
+        clean_value = value.strip()
+        if not clean_value:
+            abort(400, f"El campo {field} no puede estar vacío.")
+    else:
+        abort(400, f"El campo {field} debe ser texto.")
+
+
+def validate_data(task):
+    title = task.get("titulo", None)
+    description = task.get("descripcion", None)
+    status = task.get("estado", None)
+
+    if not title:
         abort(400, "El titulo de la tarea es obligatorio")
+
+    validate_type(title, "titulo")
 
     if not description:
         abort(400, "La descripcion de la tarea es obligatoria")
 
+    validate_type(description, "descripcion")
+
     if status:
-        normalized_status = status.title()
-        if normalized_status not in task_status:
-            abort(400, "El estado es invalido")
+        validate_status(status)
     else:
         abort(400, "El estado de la tarea es obligatorio")
 
