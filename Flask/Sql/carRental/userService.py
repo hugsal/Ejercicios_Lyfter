@@ -34,3 +34,6 @@ class UserService:
     def update_user(self, user_id, data):
         status = data.get("status")
         return self.user_repository.update_user(user_id, status)
+
+    def flag_defaulter(self, user_id):
+        return self.user_repository.update_user(user_id, "defaulter")

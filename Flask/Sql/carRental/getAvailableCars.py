@@ -23,7 +23,7 @@ def get_available_cars():
         print("Error al obtener informacion")
         print(err)
     finally:
-        dbManager.close_connection
+        dbManager.close_connection()
 
 
 if __name__ == "__main__":

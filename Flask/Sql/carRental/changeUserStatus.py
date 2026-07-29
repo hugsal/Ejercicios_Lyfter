@@ -13,7 +13,7 @@ def change_user_status(new_status, id):
         print("Error al editar el status del usuario")
         print(err)
     finally:
-        dbManager.close_connection
+        dbManager.close_connection()
 
 
 if __name__ == "__main__":

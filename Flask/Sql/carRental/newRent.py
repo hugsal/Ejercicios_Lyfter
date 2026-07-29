@@ -13,7 +13,7 @@ def create_rent(user_id, car_id):
         print("Error al crear nueva renta")
         print(err)
     finally:
-        dbManager.close_connection
+        dbManager.close_connection()
 
 
 if __name__ == "__main__":

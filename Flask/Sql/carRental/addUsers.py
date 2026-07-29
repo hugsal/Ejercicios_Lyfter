@@ -7,7 +7,7 @@ try:
 
     dbManager.execute_query(query)
 
-    query = """CREATE TABLE lyfter_car_rental.users(
+    query = """CREATE TABLE IF NOT EXISTS lyfter_car_rental.users(
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     full_name VARCHAR(100) NOT NULL,
     email VARCHAR(50) UNIQUE NOT NULL,
@@ -19,7 +19,7 @@ try:
 
     dbManager.execute_query(query)
 
-    query = """INSERT INTO lyfter_car_rental.users (full_name, email, user_name, user_password, birthday) 
+    query = """INSERT INTO lyfter_car_rental.users (full_name, email, user_name, user_password, born_date) 
     VALUES
 ('Jacquelynn Fay', 'jfay0@weather.com', 'jfay0', '927434728-6', '1980-11-29'),
 ('Abraham Iorizzo', 'aiorizzo1@npr.org', 'aiorizzo1', '922594782-8', '1991-04-24'),
@@ -102,4 +102,4 @@ except Exception as err:
     print("Error al inserta usuarios en la base de datos")
     print(err)
 finally:
-    dbManager.close_connection
+    dbManager.close_connection()

@@ -7,22 +7,23 @@ def finish_rent(rent_id):
     try:
         query = "SELECT fk_car_id FROM lyfter_car_rental.user_car_rent WHERE id = %s"
         result = dbManager.execute_query(query, rent_id)
+        if not result:
+            return None
         car_id = result[0][0]
 
-        query = "UPDATE lyfter_car_rental.cars SET status = %s WHERE id = %s"
-        new_status = "ready"
-        dbManager.execute_query(query, new_status, car_id)
-
-        query = (
-            "UPDATE lyfter_car_rental.user_car_rent SET rent_status = %s WHERE id = %s"
+        update_car_query = (
+            "UPDATE lyfter_car_rental.cars SET status = 'ready' WHERE id = %s"
         )
-        new_status = "finished"
-        dbManager.execute_query(query, new_status, rent_id)
+        dbManager.execute_query(update_car_query, car_id)
+
+        update_rent_query = "UPDATE lyfter_car_rental.user_car_rent SET rent_status = 'finished' WHERE id = %s RETURNING *"
+        rental = dbManager.execute_query(update_rent_query, rent_id)
+        return rental
     except Exception as err:
         print("Error al finalizar renta")
         print(err)
     finally:
-        dbManager.close_connection
+        dbManager.close_connection()
 
 
 if __name__ == "__main__":

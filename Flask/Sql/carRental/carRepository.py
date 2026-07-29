@@ -30,13 +30,19 @@ class CarRepository:
 
     def get_car_by_id(self, car_id):
         query = "SELECT * FROM lyfter_car_rental.cars WHERE id = %s"
-        car = self.db_manager.execute_query(query, car_id)[0]
-        return self.__format_car(car)
+        cars = self.db_manager.execute_query(query, car_id)
+        if not cars:
+            return None
+        return self.__format_car(cars[0])
 
     def create_car(self, *args):
         car = add_car(*args)
-        print("car", car)
+        if not car:
+            return None
         return self.__format_car(car)
 
     def change_car_status(self, new_status, car_id):
-        change_car_status(new_status, car_id)
+        car = change_car_status(new_status, car_id)
+        if not car:
+            return None
+        return self.__format_car(car)

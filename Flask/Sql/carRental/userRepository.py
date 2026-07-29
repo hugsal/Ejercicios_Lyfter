@@ -30,14 +30,20 @@ class UserRepository:
 
     def get_user_by_id(self, user_id):
         query = "SELECT * FROM lyfter_car_rental.users WHERE id = %s"
-        user = self.db_manager.execute_query(query, user_id)[0]
-        return self.__format_user(user)
+        users = self.db_manager.execute_query(query, user_id)
+        if not users:
+            return None
+        return self.__format_user(users[0])
 
     def create(self, *args):
         user = add_user(*args)
+        if not user:
+            return None
         return self.__format_user(user)
 
     def update_user(self, user_id, status):
         query = "UPDATE lyfter_car_rental.users SET account_status = %s WHERE id = %s RETURNING *"
         user = self.db_manager.execute_query(query, status, user_id)
+        if not user:
+            return None
         return self.__format_user(user)

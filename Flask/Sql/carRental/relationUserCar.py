@@ -3,7 +3,7 @@ from config import DB_NAME, USER, PASSWORD, HOST
 
 dbManager = DbManager(DB_NAME, USER, PASSWORD, HOST)
 try:
-    query = """CREATE TABLE lyfter_car_rental.user_car_rent (
+    query = """CREATE TABLE IF NOT EXISTS lyfter_car_rental.user_car_rent (
 id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 rent_date DATE NOT NULL DEFAULT NOW(),
 rent_status VARCHAR(30) NOT NULL DEFAULT 'on_time',
@@ -49,4 +49,4 @@ except Exception as err:
     print("Error al insertar relaciones en la base de datos")
     print(err)
 finally:
-    dbManager.close_connection
+    dbManager.close_connection()

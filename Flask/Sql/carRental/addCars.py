@@ -3,7 +3,7 @@ from config import DB_NAME, USER, PASSWORD, HOST
 
 dbManager = DbManager(DB_NAME, USER, PASSWORD, HOST)
 try:
-    query = """CREATE TABLE lyfter_car_rental.cars (
+    query = """CREATE TABLE IF NOT EXISTS lyfter_car_rental.cars (
 id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 make VARCHAR(50) NOT NULL,
 model VARCHAR(50) UNIQUE NOT NULL,
@@ -13,7 +13,7 @@ status VARCHAR(30) NOT NULL DEFAULT 'ready'
 
     dbManager.execute_query(query)
 
-    query = """INSERT INTO lyfter_car_rental.cars (make, model, car_year)
+    query = """INSERT INTO lyfter_car_rental.cars (make, model, year)
     VALUES
 ('Audi', 'RS 4', 2008),
 ('Dodge', 'Ram Wagon B350', 1993),
@@ -52,4 +52,4 @@ except Exception as err:
     print("Error al insertar carros en la base de datos")
     print(err)
 finally:
-    dbManager.close_connection
+    dbManager.close_connection()
