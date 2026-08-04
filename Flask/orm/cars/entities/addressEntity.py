@@ -1,6 +1,7 @@
-from sqlalchemy import Integer, String, ForeignKey 
+from sqlalchemy import Integer, String, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from database import BaseDb
+
 
 class Address(BaseDb):
     __tablename__ = "addresses"
@@ -10,7 +11,9 @@ class Address(BaseDb):
     city: Mapped[str] = mapped_column(String(50), nullable=False)
     state: Mapped[str] = mapped_column(String(50), nullable=False)
     zip_code: Mapped[str] = mapped_column(String(10), nullable=False)
-    fk_user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
+    fk_user_id: Mapped[int] = mapped_column(
+        ForeignKey("users.id", ondelete="CASCADE"), nullable=False
+    )
     user: Mapped["User"] = relationship("User", back_populates="address")
 
     def __repr__(self):
