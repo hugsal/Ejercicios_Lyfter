@@ -67,7 +67,6 @@ def get_user_by_id(user_id):
 
 @app.route("/users/<user_id>", methods=["PUT"])
 def update_user(user_id):
-    print("update_user")
     data = request.json
     validate_user_data(data)
     db = get_db()
@@ -96,7 +95,6 @@ def update_user(user_id):
 
 @app.route("/users/<user_id>", methods=["DELETE"])
 def delete_user(user_id):
-    print("delete_user")
     db = get_db()
     user = UserRepository.get_user_by_id(db, user_id)
     if not user:
@@ -240,7 +238,7 @@ def delete_address(address_id):
     return {}, 200
 
 
-@app.route("/user/<user_id>/car/<car_id>", methods=["PUT"])
+@app.route("/users/<user_id>/cars/<car_id>", methods=["PUT"])
 def assign_car_to_user(user_id, car_id):
     db = get_db()
     user = UserRepository.get_user_by_id(db, user_id)
