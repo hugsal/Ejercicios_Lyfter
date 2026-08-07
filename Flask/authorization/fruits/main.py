@@ -57,8 +57,8 @@ def login():
 @validate_roles(["admin", "user"])
 def me():
     db = get_db()
-    payload = request.user_payload
-    user_id = payload["id"]
+    authenticated_user = request.user_payload
+    user_id = authenticated_user["id"]
     user = UserRepository.get_user_by_id(db, user_id)
     return {"userId": user_id, "userName": user["userName"]}, 200
 
@@ -219,12 +219,16 @@ def delete_fruit(fruit_id):
 def sales():
     data = request.json
     db = get_db()
-    user_id = data.get("userId")
+    authenticated_user = request.user_payload
+    user_id = authenticated_user["id"]
 
     if not user_id or not UserRepository.get_user_by_id(db, user_id):
         abort(400, "El usuario no es valido")
 
     fruits = data.get("fruits")
+    if not fruits:
+        abort(400, "No hay informacion para procesar")
+
     available_fruits = []
 
     for fruit in fruits:
