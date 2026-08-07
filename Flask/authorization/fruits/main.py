@@ -7,7 +7,8 @@ from repositories.fruitInvoiceRepository import FruitsInvoiceRepository
 from helpers.userValidations import validate_user_data, validate_login_data
 from helpers.fruitValidations import validate_fruit_data
 from validateRoles import validate_roles
-from extension import jwt_manager
+from extension import jwt_manager, cache_manager
+import json
 
 app = Flask(__name__)
 
@@ -149,7 +150,44 @@ def delete_user(user_id):
 @validate_roles(["admin"])
 def get_fruits():
     db = get_db()
-    return {"fruits": FruitRepository.get_fruits(db)}, 200
+    cache_fruit_ids = cache_manager.get_list_data("fruits:id")
+
+    if not cache_fruit_ids:
+        fruits = FruitRepository.get_fruits(db)
+        if not fruits:
+            return {"fruits": fruits}, 200
+        try:
+            fruit_ids = [fruit["id"] for fruit in fruits]
+            cache_manager.store_list("fruits:id", fruit_ids)
+            for fruit in fruits:
+                cache_manager.store_data(f"fruit:{fruit["id"]}", json.dumps(fruit))
+        except:
+            abort(400, " Error al procesar datos de cache")
+
+        return {"fruits": fruits}, 200
+
+    fruit_ids = [f"fruit:{fruit_id}" for fruit_id in cache_fruit_ids]
+    fruits = [
+        json.loads(fruit) if fruit else None
+        for fruit in cache_manager.get_all_data(fruit_ids)
+    ]
+    result = []
+    missing_ids = []
+
+    for index, value in enumerate(fruits):
+        if value is None:
+            missing_ids.append(index)
+        else:
+            result.append(value)
+
+    if missing_ids:
+        missing_fruits = FruitRepository.get_fruit_by_ids(missing_ids)
+
+        for fruit in missing_fruits:
+            cache_manager.store_data(f"fruit:{fruit["id"]}", json.dumps(fruit))
+            result.append(fruit)
+
+    return {"fruits": result}, 200
 
 
 @app.route("/fruits", methods=["POST"])
@@ -167,6 +205,8 @@ def create_fruit():
         abort(400, "La fruta ya existe")
 
     new_fruit = FruitRepository.create_fruit(db, name, price, quantity)
+    cache_manager.store_list("fruits:id", [new_fruit["id"]])
+    cache_manager.store_data(f"fruit:{new_fruit["id"]}", json.dumps(new_fruit))
 
     return {"fruit": new_fruit}, 201
 
@@ -175,9 +215,15 @@ def create_fruit():
 @validate_roles(["admin"])
 def get_fruit_by_id(fruit_id):
     db = get_db()
+    fruit = cache_manager.get_data(f"fruit:{fruit_id}")
+    if fruit:
+        return {"fruit": json.loads(fruit)}, 200
+
     fruit = FruitRepository.get_fruit_by_id(db, fruit_id)
     if not fruit:
         abort(404, "Fruta no encontrada")
+
+    cache_manager.store_data(f"fruit:{fruit_id}", json.dumps(fruit))
     return {"fruit": fruit}, 200
 
 
@@ -197,6 +243,7 @@ def update_fruit(fruit_id):
     quantity = data.get("quantity")
 
     updated_fruit = FruitRepository.update_fruit(db, fruit["id"], name, price, quantity)
+    cache_manager.delete_data(f"fruit:{fruit_id}")
 
     return {"fruit": updated_fruit}, 200
 
@@ -210,6 +257,8 @@ def delete_fruit(fruit_id):
         abort(404, "Fruta no encontrado")
 
     FruitRepository.delete_fruit(db, fruit["id"])
+    cache_manager.delete_data(f"fruit:{fruit_id}")
+    cache_manager.delete_from_list("fruits:id", fruit_id)
     return {}, 200
 
 
