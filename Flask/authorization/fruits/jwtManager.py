@@ -13,7 +13,7 @@ class JwtManager:
             return encoded
         except Exception as ex:
             print(ex)
-            return None
+            abort(400, "Fallo proceso de autenticacion")
 
     def decode(self, token):
         try:
@@ -21,4 +21,4 @@ class JwtManager:
             return decoded
         except Exception as e:
             print(e)
-            return None
+            raise ValueError("Token expirado")

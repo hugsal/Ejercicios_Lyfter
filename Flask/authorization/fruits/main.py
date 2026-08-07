@@ -41,16 +41,16 @@ def login():
     user_name = data.get("userName")
     user = UserRepository.get_user_by_user_name(db, user_name)
     if not user:
-        abort(403, "Usuario o Password incorrecto")
+        abort(401, "Usuario o Password incorrecto")
 
     if data.get("password") != user.get("password"):
-        abort(403, "Usuario o Password incorrecto")
+        abort(401, "Usuario o Password incorrecto")
 
     user_id = user.get("id")
     rol = user.get("role")
     token = jwt_manager.encode({"id": user_id, "role": rol})
 
-    return {"token": token}, 201
+    return {"token": token}, 200
 
 
 @app.route("/me")
@@ -118,18 +118,19 @@ def update_user(user_id):
     name = data.get("name")
     email = data.get("email")
     user_name = data.get("userName")
+    role = data.get("role")
 
     if (
         user_name
         and user["userName"] != user_name
-        and UserRepository.get_user_by_name(db, user_name)
+        and UserRepository.get_user_by_user_name(db, user_name)
     ):
         abort(400, "El nombre de usuario ya existe")
 
     if email and user["email"] != email and UserRepository.get_user_by_email(db, email):
         abort(400, "El correo ya existe")
 
-    user = UserRepository.update_user(db, user_id, name, email, user_name)
+    user = UserRepository.update_user(db, user_id, name, email, user_name, role)
     return {"user": user}, 200
 
 
@@ -252,9 +253,11 @@ def sales():
     return {"invoice": invoice}, 201
 
 
-@app.route("/invoices/<user_id>")
+@app.route("/invoices")
 @validate_roles(["admin", "user"])
-def get_invoices(user_id):
+def get_invoices():
+    payload = request.user_payload
+    user_id = payload["id"]
     db = get_db()
     user_id_int = int(user_id)
     return {"invoices": InvoiceRepository.get_invoice_by_user_id(db, user_id_int)}, 200

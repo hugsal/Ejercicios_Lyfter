@@ -58,7 +58,7 @@ class UserRepository:
         return list(map(UserRepository.format_user, db.scalars(stmt).all()))
 
     @staticmethod
-    def update_user(db, user_id, name, email, usr):
+    def update_user(db, user_id, name, email, usr, role):
         user = db.get(User, user_id)
         if user:
             if name is not None:
@@ -67,6 +67,8 @@ class UserRepository:
                 user.user_name = usr
             if email is not None:
                 user.email = email
+            if role is not None:
+                user.role = role
             db.commit()
             db.refresh(user)
         return UserRepository.format_user(user)
