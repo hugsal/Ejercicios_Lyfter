@@ -10,7 +10,7 @@ def validate_roles(allowed_roles):
             auth = request.headers.get("Authorization")
 
             if not auth:
-                abort(403, "Token no valido")
+                abort(401, "Token no valido")
 
             parts = auth.split()
             if parts[0].lower() != "bearer":

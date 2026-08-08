@@ -5,25 +5,11 @@ from sqlalchemy import select
 class UserRepository:
     @staticmethod
     def format_user(user):
-        return {
-            "id": user.id,
-            "name": user.name,
-            "email": user.email,
-            "userName": user.user_name,
-            "role": user.role,
-        }
+        return {"id": user.id, "name": user.name, "email": user.email, "userName": user.user_name}
 
     @staticmethod
-    def format_user_with_password(user):
-        formatted_user = UserRepository.format_user(user)
-        formatted_user["password"] = user.password
-        return formatted_user
-
-    @staticmethod
-    def create_user(db, name, email, role, user_name, password):
-        new_user = User(
-            name=name, email=email, role=role, user_name=user_name, password=password
-        )
+    def create_user(db, name, email, user_name):
+        new_user = User(name=name, email=email, user_name=user_name)
         db.add(new_user)
         db.commit()
         db.refresh(new_user)
@@ -37,12 +23,12 @@ class UserRepository:
         return UserRepository.format_user(user)
 
     @staticmethod
-    def get_user_by_user_name(db, user_name):
+    def get_user_by_name(db, user_name):
         stmt = select(User).where(User.user_name == user_name)
         user = db.scalar(stmt)
         if not user:
             return None
-        return UserRepository.format_user_with_password(user)
+        return UserRepository.format_user(user)
 
     @staticmethod
     def get_user_by_email(db, email):
@@ -58,7 +44,7 @@ class UserRepository:
         return list(map(UserRepository.format_user, db.scalars(stmt).all()))
 
     @staticmethod
-    def update_user(db, user_id, name, email, usr, role):
+    def update_user(db, user_id, name, email, usr):
         user = db.get(User, user_id)
         if user:
             if name is not None:
@@ -67,8 +53,6 @@ class UserRepository:
                 user.user_name = usr
             if email is not None:
                 user.email = email
-            if role is not None:
-                user.role = role
             db.commit()
             db.refresh(user)
         return UserRepository.format_user(user)
