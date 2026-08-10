@@ -163,7 +163,7 @@ def get_fruits():
             for fruit in fruits:
                 cache_manager.store_data(f"fruit:{fruit["id"]}", json.dumps(fruit))
         except:
-            abort(400, " Error al procesar datos de cache")
+            abort(500, " Error al procesar datos de cache")
 
         return {"fruits": fruits}, 200
 
@@ -177,12 +177,12 @@ def get_fruits():
 
     for index, value in enumerate(fruits):
         if value is None:
-            missing_ids.append(index)
+            missing_ids.append(fruit_ids[index].split(":")[1])
         else:
             result.append(value)
 
     if missing_ids:
-        missing_fruits = FruitRepository.get_fruit_by_ids(missing_ids)
+        missing_fruits = FruitRepository.get_fruit_by_ids(db, missing_ids)
 
         for fruit in missing_fruits:
             cache_manager.store_data(f"fruit:{fruit["id"]}", json.dumps(fruit))
@@ -204,6 +204,18 @@ def create_fruit():
 
     if FruitRepository.get_fruit_by_name(db, name):
         abort(400, "La fruta ya existe")
+
+    cache_fruit_ids = cache_manager.get_list_data("fruits:id")
+    if not cache_fruit_ids:
+        fruits = FruitRepository.get_fruits(db)
+        if fruits:
+            try:
+                fruit_ids = [fruit["id"] for fruit in fruits]
+                cache_manager.store_list("fruits:id", fruit_ids)
+                for fruit in fruits:
+                    cache_manager.store_data(f"fruit:{fruit["id"]}", json.dumps(fruit))
+            except:
+                abort(500, " Error al procesar datos de cache")
 
     new_fruit = FruitRepository.create_fruit(db, name, price, quantity)
     cache_manager.store_list("fruits:id", [new_fruit["id"]])
@@ -300,6 +312,7 @@ def sales():
             db, quantity, partial_amount, fruit_id, invoice["id"]
         )
         FruitRepository.subtract_from_inventory(db, fruit_id, quantity)
+        cache_manager.delete_data(f"fruit:{fruit_id}")
 
     invoice = InvoiceRepository.update_total_amount(db, invoice["id"], total_amount)
 

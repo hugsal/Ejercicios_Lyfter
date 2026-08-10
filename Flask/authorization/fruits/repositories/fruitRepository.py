@@ -31,10 +31,7 @@ class FruitRepository:
     @staticmethod
     def get_fruit_by_ids(db, fruit_ids):
         stmt = select(Fruit).where(Fruit.id.in_(fruit_ids))
-        fruit = db.scalar(stmt).all()
-        if not fruit:
-            return None
-        return FruitRepository.format_fruit(fruit)
+        return list(map(FruitRepository.format_fruit, db.scalars(stmt).all()))
 
     @staticmethod
     def get_fruit_by_name(db, name):
