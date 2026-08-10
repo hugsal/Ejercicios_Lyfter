@@ -50,7 +50,14 @@ class FinancePresenter:
         )
 
     def handle_new_transaction(self, transaction_event):
-        categories_list = self.categories.get_categories()
+        try:
+            categories_list = self.categories.get_categories()
+            if not categories_list:
+                raise ValueError("Category cannot be empty")
+        except ValueError as ex:
+            self.view.show_error(str(ex))
+            return
+
         values = self.view.show_new_transaction_window(
             categories_list, transaction_event
         )
