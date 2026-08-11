@@ -160,12 +160,14 @@ def get_fruits():
 
         try:
             cache_manager.store_data("fruits:all", json.dumps(fruits), 600)
+            # Con un cache temporal aseguras un manejo optimo de memoria y de recursos
+            # tambien es una manera de evitar legacy data y se se actualice la informacion
             for fruit in fruits:
                 cache_manager.store_data(f"fruit:{fruit["id"]}", json.dumps(fruit), 600)
 
             return {"fruits": fruits}, 200
         except:
-            abort(400, " Error al procesar datos de cache")
+            abort(500, " Error al procesar datos de cache")
 
     result = json.loads(cache_manager.get_data("fruits:all"))
 
@@ -185,6 +187,18 @@ def create_fruit():
 
     if FruitRepository.get_fruit_by_name(db, name):
         abort(400, "La fruta ya existe")
+
+    cache_fruit_ids = cache_manager.get_list_data("fruits:id")
+    if not cache_fruit_ids:
+        fruits = FruitRepository.get_fruits(db)
+        if fruits:
+            try:
+                fruit_ids = [fruit["id"] for fruit in fruits]
+                cache_manager.store_list("fruits:id", fruit_ids)
+                for fruit in fruits:
+                    cache_manager.store_data(f"fruit:{fruit["id"]}", json.dumps(fruit))
+            except:
+                abort(500, " Error al procesar datos de cache")
 
     new_fruit = FruitRepository.create_fruit(db, name, price, quantity)
     cache_manager.store_data(f"fruit:{new_fruit["id"]}", json.dumps(new_fruit), 600)
