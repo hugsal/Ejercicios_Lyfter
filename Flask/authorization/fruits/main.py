@@ -151,42 +151,23 @@ def delete_user(user_id):
 @validate_roles(["admin"])
 def get_fruits():
     db = get_db()
-    cache_fruit_ids = cache_manager.get_list_data("fruits:id")
+    cache_fruits = cache_manager.get_data("fruits:all")
 
-    if not cache_fruit_ids:
+    if not cache_fruits:
         fruits = FruitRepository.get_fruits(db)
         if not fruits:
             return {"fruits": fruits}, 200
+
         try:
-            fruit_ids = [fruit["id"] for fruit in fruits]
-            cache_manager.store_list("fruits:id", fruit_ids)
+            cache_manager.store_data("fruits:all", json.dumps(fruits), 600)
             for fruit in fruits:
-                cache_manager.store_data(f"fruit:{fruit["id"]}", json.dumps(fruit))
+                cache_manager.store_data(f"fruit:{fruit["id"]}", json.dumps(fruit), 600)
+
+            return {"fruits": fruits}, 200
         except:
             abort(400, " Error al procesar datos de cache")
 
-        return {"fruits": fruits}, 200
-
-    fruit_ids = [f"fruit:{fruit_id}" for fruit_id in cache_fruit_ids]
-    fruits = [
-        json.loads(fruit) if fruit else None
-        for fruit in cache_manager.get_all_data(fruit_ids)
-    ]
-    result = []
-    missing_ids = []
-
-    for index, value in enumerate(fruits):
-        if value is None:
-            missing_ids.append(index)
-        else:
-            result.append(value)
-
-    if missing_ids:
-        missing_fruits = FruitRepository.get_fruit_by_ids(missing_ids)
-
-        for fruit in missing_fruits:
-            cache_manager.store_data(f"fruit:{fruit["id"]}", json.dumps(fruit))
-            result.append(fruit)
+    result = json.loads(cache_manager.get_data("fruits:all"))
 
     return {"fruits": result}, 200
 
@@ -206,8 +187,8 @@ def create_fruit():
         abort(400, "La fruta ya existe")
 
     new_fruit = FruitRepository.create_fruit(db, name, price, quantity)
-    cache_manager.store_list("fruits:id", [new_fruit["id"]])
-    cache_manager.store_data(f"fruit:{new_fruit["id"]}", json.dumps(new_fruit))
+    cache_manager.store_data(f"fruit:{new_fruit["id"]}", json.dumps(new_fruit), 600)
+    cache_manager.delete_data("fruits:all")
 
     return {"fruit": new_fruit}, 201
 
@@ -224,7 +205,7 @@ def get_fruit_by_id(fruit_id):
     if not fruit:
         abort(404, "Fruta no encontrada")
 
-    cache_manager.store_data(f"fruit:{fruit_id}", json.dumps(fruit))
+    cache_manager.store_data(f"fruit:{fruit_id}", json.dumps(fruit), 600)
     return {"fruit": fruit}, 200
 
 
@@ -245,6 +226,7 @@ def update_fruit(fruit_id):
 
     updated_fruit = FruitRepository.update_fruit(db, fruit["id"], name, price, quantity)
     cache_manager.delete_data(f"fruit:{fruit_id}")
+    cache_manager.delete_data("fruits:all")
 
     return {"fruit": updated_fruit}, 200
 
@@ -259,7 +241,7 @@ def delete_fruit(fruit_id):
 
     FruitRepository.delete_fruit(db, fruit["id"])
     cache_manager.delete_data(f"fruit:{fruit_id}")
-    cache_manager.delete_from_list("fruits:id", fruit_id)
+    cache_manager.delete_data(f"fruits:all")
     return {}, 200
 
 
@@ -300,8 +282,10 @@ def sales():
             db, quantity, partial_amount, fruit_id, invoice["id"]
         )
         FruitRepository.subtract_from_inventory(db, fruit_id, quantity)
+        cache_manager.delete_data(f"fruit:{fruit_id}")
 
     invoice = InvoiceRepository.update_total_amount(db, invoice["id"], total_amount)
+    cache_manager.delete_data("fruits:all")
 
     return {"invoice": invoice}, 201
 
