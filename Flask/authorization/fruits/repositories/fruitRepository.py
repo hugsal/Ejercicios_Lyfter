@@ -29,6 +29,11 @@ class FruitRepository:
         return FruitRepository.format_fruit(fruit)
 
     @staticmethod
+    def get_fruit_by_ids(db, fruit_ids):
+        stmt = select(Fruit).where(Fruit.id.in_(fruit_ids))
+        return list(map(FruitRepository.format_fruit, db.scalars(stmt).all()))
+
+    @staticmethod
     def get_fruit_by_name(db, name):
         stmt = select(Fruit).where(Fruit.name == name)
         fruit = db.scalar(stmt)
