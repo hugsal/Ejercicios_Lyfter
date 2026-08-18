@@ -1,0 +1,8 @@
+DB_NAME = ""
+USER = ""
+PASSWORD = ""
+HOST = ""
+
+REDIS_HOST = ""
+REDIS_PORT = ""
+REDIS_PASSWORD = ""
