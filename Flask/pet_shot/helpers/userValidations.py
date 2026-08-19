@@ -2,7 +2,7 @@ from flask import abort
 import re
 
 EMAIL_REGEX = re.compile(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
-ROLES = ("admin", "client", "cliente")
+ROLES = ("admin", "client")
 
 
 def validate_login_data(data):

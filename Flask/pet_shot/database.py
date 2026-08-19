@@ -1,8 +1,8 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
-from config import DB_NAME, USER, PASSWORD, HOST
+from config import DB_NAME, DB_USER, DB_PASSWORD, DB_HOST
 
-url = f"postgresql://{USER}:{PASSWORD}@{HOST}/{DB_NAME}"
+url = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}"
 
 engine = create_engine(url, echo=False)
 

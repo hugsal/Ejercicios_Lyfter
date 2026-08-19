@@ -31,9 +31,12 @@ from main import (
     get_invoice_by_id as main_get_invoice_by_id,
     refund_invoice,
 )
+from repositories.cartRepository import CartRepository
+from repositories.invoiceRepository import InvoiceRepository
 
 
 class TestMainHelperMethods(unittest.TestCase):
+
 
     def test_handle_http_exception(self):
         ex = BadRequest("Error de prueba")
@@ -481,5 +484,68 @@ class TestSalesAndInvoiceMethods(unittest.TestCase):
             mock_prod_repo.add_stock.assert_called_once_with(mock_get_db.return_value, "p1", 2)
 
 
+class TestRepositoryMethods(unittest.TestCase):
+
+    def test_format_cart_none(self):
+        self.assertIsNone(CartRepository.format_cart(None))
+
+    def test_format_cart_with_items(self):
+        mock_product = MagicMock()
+        mock_product.id = 10
+        mock_product.name = "Croquetas"
+        mock_product.price = 25.0
+
+        mock_item = MagicMock()
+        mock_item.id = 1
+        mock_item.fk_product_id = 10
+        mock_item.product = mock_product
+        mock_item.quantity = 2
+
+        mock_cart = MagicMock()
+        mock_cart.id = 100
+        mock_cart.fk_user_id = 5
+        mock_cart.status = "active"
+        mock_cart.created_at = None
+        mock_cart.updated_at = None
+        mock_cart.items = [mock_item]
+
+        res = CartRepository.format_cart(mock_cart)
+        self.assertEqual(res["id"], 100)
+        self.assertEqual(res["totalAmount"], 50.0)
+        self.assertEqual(len(res["items"]), 1)
+        self.assertEqual(res["items"][0]["product"]["name"], "Croquetas")
+
+    def test_format_invoice_none(self):
+        self.assertIsNone(InvoiceRepository.format_invoice(None))
+
+    def test_format_invoice_with_items(self):
+        mock_product = MagicMock()
+        mock_product.name = "Juguete Perro"
+
+        mock_item = MagicMock()
+        mock_item.id = 1
+        mock_item.fk_product_id = 20
+        mock_item.product = mock_product
+        mock_item.quantity = 1
+        mock_item.unit_price = 15.0
+        mock_item.subtotal = 15.0
+
+        mock_invoice = MagicMock()
+        mock_invoice.id = "inv-123"
+        mock_invoice.total_amount = 15.0
+        mock_invoice.purchase_date = None
+        mock_invoice.fk_user_id = 5
+        mock_invoice.billing_address = "San Jose"
+        mock_invoice.payment_method = "SINPE"
+        mock_invoice.payment_reference = "REF999"
+        mock_invoice.status = "paid"
+        mock_invoice.items = [mock_item]
+
+        res = InvoiceRepository.format_invoice(mock_invoice)
+        self.assertEqual(res["id"], "inv-123")
+        self.assertEqual(res["items"][0]["productName"], "Juguete Perro")
+
+
 if __name__ == "__main__":
     unittest.main()
+

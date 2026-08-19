@@ -25,10 +25,6 @@ from cacheManager import cache_manager
 
 app = Flask(__name__)
 
-with app.app_context():
-    BaseDb.metadata.create_all(bind=engine)
-
-
 @app.errorhandler(HTTPException)
 def handle_http_exception(e):
     """Manejador global para retornar errores HTTP en formato JSON."""
@@ -498,4 +494,7 @@ def refund_invoice(invoice_id):
 
 
 if __name__ == "__main__":
+    with app.app_context():
+        BaseDb.metadata.create_all(bind=engine)
     app.run(host="localhost", port=4000, debug=True)
+

@@ -23,7 +23,7 @@ class Cart(BaseDb):
     )
 
     items: Mapped[List["CartItem"]] = relationship(
-        "CartItem", back_populates="cart", cascade="all, delete-orphan"
+        "CartItem", back_populates="cart", cascade="all, delete-orphan", lazy="selectin"
     )
 
     def __repr__(self):
@@ -43,7 +43,7 @@ class CartItem(BaseDb):
     quantity: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
 
     cart: Mapped["Cart"] = relationship("Cart", back_populates="items")
-    product = relationship("Product")
+    product = relationship("Product", lazy="joined")
 
     def __repr__(self):
         return f"<CartItem(id={self.id}, cart_id={self.fk_cart_id}, product_id={self.fk_product_id}, quantity={self.quantity})>"

@@ -1,5 +1,7 @@
 from entities.invoiceEntity import Invoice
+from entities.invoiceItemEntity import InvoiceItem
 from sqlalchemy import select
+from sqlalchemy.orm import selectinload, joinedload
 
 
 class InvoiceRepository:
@@ -49,33 +51,49 @@ class InvoiceRepository:
         )
         db.add(new_invoice)
         db.commit()
-        db.refresh(new_invoice)
-        return InvoiceRepository.format_invoice(new_invoice)
+        return InvoiceRepository.get_invoice_by_id(db, new_invoice.id)
 
     @staticmethod
     def get_invoice_by_id(db, invoice_id):
-        invoice = db.get(Invoice, str(invoice_id))
+        stmt = (
+            select(Invoice)
+            .options(selectinload(Invoice.items).joinedload(InvoiceItem.product))
+            .where(Invoice.id == str(invoice_id))
+        )
+        invoice = db.scalar(stmt)
         if not invoice:
             return None
         return InvoiceRepository.format_invoice(invoice)
 
     @staticmethod
     def get_invoice_entity_by_id(db, invoice_id):
-        return db.get(Invoice, str(invoice_id))
+        stmt = (
+            select(Invoice)
+            .options(selectinload(Invoice.items).joinedload(InvoiceItem.product))
+            .where(Invoice.id == str(invoice_id))
+        )
+        return db.scalar(stmt)
 
     @staticmethod
     def get_invoices_by_user_id(db, user_id):
         stmt = (
             select(Invoice)
+            .options(selectinload(Invoice.items).joinedload(InvoiceItem.product))
             .where(Invoice.fk_user_id == user_id)
             .order_by(Invoice.purchase_date.desc())
         )
-        return list(map(InvoiceRepository.format_invoice, db.scalars(stmt).all()))
+        invoices = db.scalars(stmt).unique().all()
+        return list(map(InvoiceRepository.format_invoice, invoices))
 
     @staticmethod
     def get_all_invoices(db):
-        stmt = select(Invoice).order_by(Invoice.purchase_date.desc())
-        return list(map(InvoiceRepository.format_invoice, db.scalars(stmt).all()))
+        stmt = (
+            select(Invoice)
+            .options(selectinload(Invoice.items).joinedload(InvoiceItem.product))
+            .order_by(Invoice.purchase_date.desc())
+        )
+        invoices = db.scalars(stmt).unique().all()
+        return list(map(InvoiceRepository.format_invoice, invoices))
 
     @staticmethod
     def update_total_amount(db, invoice_id, amount):
@@ -83,8 +101,7 @@ class InvoiceRepository:
         if invoice:
             invoice.total_amount = amount
             db.commit()
-            db.refresh(invoice)
-            return InvoiceRepository.format_invoice(invoice)
+            return InvoiceRepository.get_invoice_by_id(db, invoice_id)
         return None
 
     @staticmethod
@@ -93,6 +110,6 @@ class InvoiceRepository:
         if invoice:
             invoice.status = status
             db.commit()
-            db.refresh(invoice)
-            return InvoiceRepository.format_invoice(invoice)
+            return InvoiceRepository.get_invoice_by_id(db, invoice_id)
         return None
+

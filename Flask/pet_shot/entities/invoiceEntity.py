@@ -25,7 +25,7 @@ class Invoice(BaseDb):
     status: Mapped[str] = mapped_column(String(20), nullable=False, default="paid")  # paid, refunded
 
     items: Mapped[List["InvoiceItem"]] = relationship(
-        "InvoiceItem", back_populates="invoice", cascade="all, delete-orphan"
+        "InvoiceItem", back_populates="invoice", cascade="all, delete-orphan", lazy="selectin"
     )
 
     def __repr__(self):

@@ -19,7 +19,7 @@ class InvoiceItem(BaseDb):
     )
 
     invoice: Mapped["Invoice"] = relationship("Invoice", back_populates="items")
-    product = relationship("Product")
+    product = relationship("Product", lazy="joined")
 
     def __repr__(self):
         return f"<InvoiceItem(id={self.id}, invoice_id='{self.fk_invoice_id}', product_id={self.fk_product_id}, quantity={self.quantity}, subtotal={self.subtotal})>"
