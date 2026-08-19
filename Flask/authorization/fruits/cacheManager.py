@@ -84,3 +84,9 @@ class CacheManager:
                 f"An error occurred while deleting element from list from Redis: {error}"
             )
             return False
+    
+    def extend_ttl(self, key, time_to_live):
+        try:
+            self.redis_client.expire(key, time_to_live)
+        except redis.RedisError as error:
+            print(f"An error occurred while extending TTL in Redis: {error}")
