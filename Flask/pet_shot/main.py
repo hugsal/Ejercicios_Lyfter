@@ -352,6 +352,8 @@ def create_sale():
     cart_id = data.get("cartId")
     if cart_id:
         cart = CartRepository.get_cart_by_id(db, cart_id)
+        if cart and cart["userId"] != user_id:
+            abort(403, "No tienes permiso para usar este carrito")
     else:
         cart = CartRepository.get_or_create_active_cart(db, user_id)
 

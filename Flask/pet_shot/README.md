@@ -32,10 +32,7 @@ pet_shot/
 ├── docs/
 │   └── TECHNICAL_DECISIONS.md # Diagrama ER y justificación de decisiones técnicas
 ├── tests/                   # Suite de pruebas unitarias
-│   ├── test_auth.py
-│   ├── test_products.py
-│   ├── test_sales_carts.py
-│   └── test_caching.py
+│   └── test_main.py
 ├── run_tests.py             # Script ejecutor automatizado de pruebas unitarias
 └── requirements.txt         # Dependencias del proyecto
 ```
@@ -92,7 +89,7 @@ El servidor estará escuchando en `http://localhost:4000`.
 
 ## 🧪 Ejecución de Unit Tests Automatizados
 
-El proyecto cuenta con una suite de **28 pruebas unitarias** aisladas en [`tests/test_main.py`](file:///Users/ihugs/projects/Ejercicios_lyfter/Flask/pet_shot/tests/test_main.py) que cubren la lógica de los métodos declarados en [`main.py`](file:///Users/ihugs/projects/Ejercicios_lyfter/Flask/pet_shot/main.py) (incluyendo métodos auxiliares de sesión DB, tokens JWT, manejo de errores HTTP y la lógica de cada vista/endpoint con datos simulados mediante `unittest.mock`).
+El proyecto cuenta con una suite de **32 pruebas unitarias** aisladas en [`tests/test_main.py`](file:///Users/ihugs/projects/Ejercicios_lyfter/Flask/pet_shot/tests/test_main.py) que cubren la lógica de los métodos declarados en [`main.py`](file:///Users/ihugs/projects/Ejercicios_lyfter/Flask/pet_shot/main.py) (incluyendo métodos auxiliares de sesión DB, tokens JWT, manejo de errores HTTP, vistas/endpoints con mocks y formateadores de datos de los repositorios).
 
 Para ejecutar la suite completa de pruebas y generar el reporte automático en consola:
 
@@ -109,6 +106,7 @@ python run_tests.py
 | `TestProductMethods` | Valida `get_products` (con/sin caché), `create_product` y `delete_product`. | 5 |
 | `TestCartMethods` | Valida `get_carts`, `add_to_cart` y `remove_from_cart`. | 3 |
 | `TestSalesAndInvoiceMethods` | Valida `create_sale` (con stock/factura y carrito vacío) y `refund_invoice` (éxito y 403 Forbidden). | 4 |
+| `TestRepositoryMethods` | Valida los métodos auxiliares de formateo `format_cart` y `format_invoice` en los repositorios. | 4 |
 
 ### Ejemplo de Salida del Reporte:
 
@@ -120,12 +118,12 @@ python run_tests.py
 ============================================================
  📊 RESUMEN EJECUTIVO DE PRUEBAS UNITARIAS
 ============================================================
- Total de Pruebas Ejecutadas : 28
- Pruebas Exitosas            : 28 ✅
+ Total de Pruebas Ejecutadas : 32
+ Pruebas Exitosas            : 32 ✅
  Pruebas Fallidas            : 0 ❌
  Errores de Ejecución        : 0 ⚠️
  Tasa de Éxito               : 100.0%
- Tiempo Total de Ejecución   : 0.055 segundos
+ Tiempo Total de Ejecución   : 0.059 segundos
 ============================================================
 
 🎉 ¡TODAS LAS PRUEBAS UNITARIAS PASARON EXITOSAMENTE! 🎉
