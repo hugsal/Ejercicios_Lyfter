@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Reservaciones</title>
+  </head>
+  <body>
+    <h1>Reservaciones</h1>
+    <form action="confirmacion.html">
+      <label for="nombre">Nombre completo:</label>
+      <br />
+      <input type="text" id="nombre" name="nombre" />
+      <br />
+      <label for="email">Correo electronico:</label>
+      <br />
+      <input type="email" id="email" name="email" />
+      <br />
+      <label for="checkin">Fecha de llegada:</label>
+      <br />
+      <input type="date" id="checkin" name="checkin" required />
+      <br />
+      <label for="checkout">Fecha de salida:</label>
+      <br />
+      <input type="date" id="checkout" name="checkout" required />
+      <br />
+      <label>Tipo de habitacion:</label>
+      <br />
+      <fieldset>
+        <input type="radio" id="standard" name="roomType" value="standard" />
+        <label for="standard">Estandar</label>
+        <br />
+        <input type="radio" id="premium" name="roomType" value="premium" />
+        <label for="premium">Premium</label>
+        <br />
+        <input type="radio" id="suite" name="roomType" value="suite" />
+        <label for="suite">Suite</label>
+      </fieldset>
+      <br />
+      <label>Extras:</label>
+      <br />
+      <fieldset>
+        <input type="checkbox" id="wifi" name="extras[]" value="wifi" />
+        <label for="wifi">WiFi</label>
+        <br />
+        <input type="checkbox" id="parking" name="extras[]" value="parking" />
+        <label for="parking">Estacionamiento</label>
+        <br />
+        <input
+          type="checkbox"
+          id="breakfast"
+          name="extras[]"
+          value="breakfast"
+        />
+        <label for="breakfast">Desayuno</label>
+      </fieldset>
+      <br />
+      <br />
+      <input type="submit" value="Enviar" />
+    </form>
+  </body>
+</html>
