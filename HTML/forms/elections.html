@@ -25,12 +25,16 @@
       <br />
       <label for="candidate">Candidato:</label>
       <br />
-      <select id="candidate" name="candidate">
-        <option hidden>Selecciona uno</option>
-        <option value="1">Candidato #1</option>
-        <option value="2">Candidato #2</option>
-        <option value="3">Candidato #3</option>
-      </select>
+      <fieldset>
+        <input type="radio" id="candidate1" name="candidate" value="1" />
+        <label for="candidate1">Candidato #1</label>
+        <br />
+        <input type="radio" id="candidate2" name="candidate" value="2" />
+        <label for="candidate2">Candidato #2</label>
+        <br />
+        <input type="radio" id="candidate3" name="candidate" value="3" />
+        <label for="candidate3">Candidato #3</label>
+      </fieldset>
       <br />
       <br />
       <input type="submit" value="Enviar" />
