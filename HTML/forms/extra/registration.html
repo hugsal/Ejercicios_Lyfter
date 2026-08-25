@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Registro</title>
+  </head>
+  <body>
+    <h1>Registro</h1>
+    <form action="gracias.html">
+      <label for="nombre">Nombre completo:</label>
+      <br />
+      <input type="text" id="nombre" name="nombre" />
+      <br />
+      <label for="email">Correo electronico:</label>
+      <br />
+      <input type="email" id="email" name="email" />
+      <br />
+      <label for="userId">Identificacion:</label>
+      <br />
+      <input type="text" id="userId" name="userId" />
+      <br />
+      <label for="course">Curso:</label>
+      <br />
+      <select name="course" id="course">
+        <option hidden>Seleccione</option>
+        <option value="webDevelopment">Desarrollo Web</option>
+        <option value="networks">Redes</option>
+        <option value="ciberSecurity">Ciberseguridad</option>
+      </select>
+      <br />
+      <label for="terms">Terminos y Condiciones:</label>
+      <input type="checkbox" id="terms" name="terms" required />
+      <br />
+      <br />
+      <input type="submit" value="Enviar" />
+    </form>
+  </body>
+</html>
