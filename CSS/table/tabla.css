@@ -1,0 +1,200 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f4f4f4;
+  padding: 40px 20px;
+}
+
+.chart-container {
+  max-width: 950px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.chart-title {
+  font-size: 32px;
+  font-weight: 900;
+  color: #000000;
+  letter-spacing: -1px;
+}
+
+.chart-date {
+  font-size: 13px;
+  font-weight: bold;
+  color: #555555;
+  letter-spacing: 0.5px;
+}
+
+.chart-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.chart-table thead tr {
+  background-color: #1240c9;
+}
+
+.chart-table thead th {
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 14px 12px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.chart-table thead th.col-this-week {
+  text-align: left;
+  padding-left: 20px;
+}
+
+.info-icon {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 1px solid #ffffff;
+  border-radius: 50%;
+  font-size: 10px;
+  line-height: 12px;
+  text-align: center;
+  margin-left: 3px;
+}
+
+.chart-table tbody tr {
+  border-bottom: 2px solid #e5e5e5;
+  height: 100px;
+}
+
+.col-rank {
+  background-color: #111625;
+  color: #ffffff;
+  font-size: 32px;
+  font-weight: 900;
+  text-align: center;
+  width: 90px;
+}
+
+.col-song-info {
+  background-color: #ffffff;
+  padding: 10px 20px;
+}
+
+.song-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.album-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  display: block;
+}
+
+.song-details {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.badge-new {
+  background-color: #ffe600;
+  color: #000000;
+  font-weight: 900;
+  font-size: 11px;
+  padding: 3px 6px;
+  border-radius: 2px;
+}
+
+.badge-arrow-down {
+  background-color: #c82333;
+  color: #ffffff;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.badge-arrow-right {
+  background-color: #7b889b;
+  color: #ffffff;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.song-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.song-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 3px;
+}
+
+.artist-name {
+  font-size: 15px;
+  color: #444444;
+}
+
+.add-icon {
+  font-size: 24px;
+  color: #7b889b;
+  font-weight: bold;
+  padding-right: 10px;
+}
+
+.col-stat {
+  font-size: 18px;
+  font-weight: bold;
+  color: #000000;
+  text-align: center;
+  width: 75px;
+}
+
+.bg-shaded {
+  background-color: #ebebeb;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+.award-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 1.5px solid #000000;
+  border-radius: 50%;
+  font-size: 14px;
+}

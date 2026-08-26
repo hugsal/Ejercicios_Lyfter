@@ -1,0 +1,104 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+  margin: 0;
+  padding: 20px;
+}
+
+.blog-container {
+  max-width: 750px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+}
+
+.blog-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.blog-title {
+  font-family: "Outfit", sans-serif;
+  font-size: 36px;
+  font-weight: 800;
+  color: #111111;
+  margin-bottom: 10px;
+}
+
+.blog-subtitle {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 19px;
+  font-weight: 400;
+  color: #666666;
+  margin-bottom: 15px;
+}
+
+.blog-meta {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 14px;
+  color: #888888;
+  margin-bottom: 15px;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.social-icon {
+  color: #666666;
+}
+
+.social-icon:hover {
+  color: #000000;
+}
+
+.banner-container {
+  margin-bottom: 25px;
+}
+
+.banner-image {
+  width: 100%;
+  border-radius: 10px;
+  display: block;
+}
+
+.blog-content p {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  text-align: justify;
+  margin-bottom: 20px;
+}
+
+.promo-card {
+  float: right;
+  width: 260px;
+  margin: 5px 0 15px 20px;
+  background-color: #fbbf24;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.promo-title {
+  font-family: "Outfit", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #111111;
+  margin-bottom: 15px;
+}
+
+.promo-btn {
+  background-color: #222222;
+  color: #ffffff;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 14px;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}

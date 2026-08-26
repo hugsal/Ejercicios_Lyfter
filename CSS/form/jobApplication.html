@@ -1,0 +1,386 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="jobApplication.css" />
+    <title>Job Application</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-info">
+        <h1>Solicitud de Empleo</h1>
+        <p>Llenar la solicitud con letra legible y de molde</p>
+        <fieldset class="fields-container">
+          <div class="field-group">
+            <label for="fecha">Fecha</label>
+            <input type="text" id="fecha" name="fecha" />
+          </div>
+          <div class="field-group">
+            <label for="puesto">Puesto Solicitado</label>
+            <input
+              type="text"
+              id="puesto"
+              name="puesto"
+              placeholder="Puesto solicitado"
+            />
+          </div>
+          <div class="field-group">
+            <label for="sueldo">Sueldo Deseado</label>
+            <input
+              type="number"
+              id="sueldo"
+              name="sueldo"
+              placeholder="Sueldo deseado"
+            />
+          </div>
+        </fieldset>
+      </div>
+      <div class="foto"></div>
+    </header>
+    <h3>Datos Personales</h3>
+    <fieldset class="fields-container">
+      <div class="field-group">
+        <label for="apellidoPaterno">Apellido Paterno</label>
+        <input type="text" id="apellidoPaterno" name="apellidoPaterno" />
+      </div>
+      <div class="field-group">
+        <label for="apellidoMaterno">Apellido Materno</label>
+        <input type="text" id="apellidoMaterno" name="apellidoMaterno" />
+      </div>
+      <div class="field-group">
+        <label for="nombres">Nombres</label>
+        <input type="text" id="nombres" name="nombres" />
+      </div>
+      <div class="field-group">
+        <label for="edad">Edad</label>
+        <input type="text" id="edad" name="edad" />
+      </div>
+    </fieldset>
+    <fieldset class="fields-container">
+      <div class="field-group">
+        <label for="domicilio">Domicilio</label>
+        <input type="text" id="domicilio" name="domicilio" />
+      </div>
+      <div class="field-group">
+        <label for="colonia">Colonia</label>
+        <input type="text" id="colonia" name="colonia" />
+      </div>
+      <div class="field-group">
+        <label for="codigoPostal">Codigo postal</label>
+        <input type="text" id="codigoPostal" name="codigoPostal" />
+      </div>
+      <div class="field-group">
+        <label for="telefono">Telefono</label>
+        <input type="text" id="telefono" name="telefono" />
+      </div>
+      <div class="field-group">
+        <label for="movil">Movil</label>
+        <input type="text" id="movil" name="movil" />
+      </div>
+    </fieldset>
+    <fieldset class="fields-container">
+      <div class="field-group">
+        <label for="lugarNacimiento">Lugar de nacimiento</label>
+        <input type="text" id="lugarNacimiento" name="lugarNacimiento" />
+      </div>
+      <div class="field-group">
+        <label for="fechaNacimiento">Fecha de nacimiento</label>
+        <input type="text" id="fechaNacimiento" name="fechaNacimiento" />
+      </div>
+      <div class="field-group">
+        <label for="nacionalidad">Nacionalidad</label>
+        <input type="text" id="nacionalidad" name="nacionalidad" />
+      </div>
+      <div class="field-group">
+        <label for="sexo">Sexo</label>
+        <div>
+          <input type="radio" id="masculino" name="sexo" value="masculino" />
+          <label for="masculino">Masculino</label>
+          <input type="radio" id="femenino" name="sexo" value="femenino" />
+          <label for="femenino">Femenino</label>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset class="fields-container">
+      <div class="field-group">
+        <label for="viveCon">Vive con</label>
+        <div>
+          <input type="radio" id="padres" name="viveCon" value="padres" />
+          <label for="padres">Sus padres</label>
+          <input
+            type="radio"
+            id="familiares"
+            name="viveCon"
+            value="familiares"
+          />
+          <label for="familiares">Familiares</label>
+          <input type="radio" id="parientes" name="viveCon" value="parientes" />
+          <label for="parientes">Parientes</label>
+          <input type="radio" id="amigos" name="viveCon" value="amigos" />
+          <label for="amigos">Amigos</label>
+          <input type="radio" id="solo" name="viveCon" value="solo" />
+          <label for="solo">Solo</label>
+        </div>
+      </div>
+      <div class="field-group">
+        <label for="estatura">Estatura</label>
+        <input type="text" id="estatura" name="estatura" />
+      </div>
+      <div class="field-group">
+        <label for="peso">Peso</label>
+        <input type="text" id="peso" name="peso" />
+      </div>
+    </fieldset>
+    <fieldset class="fields-container">
+      <div class="field-group">
+        <label for="dependientes">Personas que dependen de usted</label>
+        <div>
+          <input type="radio" id="hijos" name="dependientes" value="hijos" />
+          <label for="hijos">Hijos</label>
+          <input
+            type="radio"
+            id="conyuge"
+            name="dependientes"
+            value="conyuge"
+          />
+          <label for="conyuge">Conyuge</label>
+          <input type="radio" id="padres" name="dependientes" value="padres" />
+          <label for="padres">Padres</label>
+          <input type="radio" id="otros" name="dependientes" value="otros" />
+          <label for="otros">Otros</label>
+        </div>
+      </div>
+      <div class="field-group">
+        <label for="estadoCivil">Estado Civil</label>
+        <div>
+          <input type="radio" id="soltero" name="estadoCivil" value="soltero" />
+          <label for="soltero">Soltero</label>
+          <input type="radio" id="casado" name="estadoCivil" value="casado" />
+          <label for="casado">Casado</label>
+          <input type="radio" id="otros" name="estadoCivil" value="otros" />
+          <label for="otros">Otros</label>
+        </div>
+      </div>
+    </fieldset>
+    <h3>Documentacion</h3>
+    <fieldset class="fields-container">
+      <div class="field-group">
+        <label for="curp">Curp</label>
+        <input type="text" id="curp" name="curp" />
+      </div>
+      <div class="field-group">
+        <label for="servicioMilitar">Numero de cartilla servicio militar</label>
+        <input type="text" id="servicioMilitar" name="servicioMilitar" />
+      </div>
+      <div class="field-group">
+        <label for="pasaporte">Numero de pasaporte</label>
+        <input type="text" id="pasaporte" name="pasaporte" />
+      </div>
+    </fieldset>
+    <fieldset class="fields-container">
+      <div class="field-group">
+        <label for="licencia">Licencia de manejo</label>
+        <div>
+          <input type="radio" id="licenciaSi" name="licencia" value="si" />
+          <label for="licenciaSi">Si</label>
+          <input type="radio" id="licenciaNo" name="licencia" value="no" />
+          <label for="licenciaNo">No</label>
+        </div>
+      </div>
+      <div class="field-group">
+        <label for="licenciaTipo">Tipo de licencia</label>
+        <input type="text" id="licenciaTipo" name="licenciaTipo" />
+      </div>
+      <div class="field-group">
+        <label for="extranjero"
+          >Si usted es extranjero adjunte documentacion que permita trabajar en
+          el pais</label
+        >
+        <input type="text" id="extranjero" name="extranjero" />
+      </div>
+    </fieldset>
+    <h3>Habitos personales</h3>
+    <fieldset class="fields-container">
+      <div class="field-group">
+        <label for="estadoSalud">Como considera su estado de salud</label>
+        <div>
+          <input type="radio" id="buena" name="estadoSalud" value="buena" />
+          <label for="buena">Buena</label>
+          <input type="radio" id="regular" name="estadoSalud" value="regular" />
+          <label for="regular">Regular</label>
+          <input type="radio" id="mala" name="estadoSalud" value="mala" />
+          <label for="mala">Mala</label>
+        </div>
+      </div>
+      <div class="field-group">
+        <label for="enfermedadCronica">Padece alguna enfermedad cronica</label>
+        <div>
+          <input
+            type="radio"
+            id="saludCronicaNo"
+            name="enfermedadCronica"
+            value="no"
+          />
+          <label for="saludCronicaNo">No</label>
+          <input
+            type="radio"
+            id="saludCronicaSi"
+            name="enfermedadCronica"
+            value="si"
+          />
+          <label for="saludCronicaSi">Si Cual?</label>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset class="fields-container">
+      <div class="field-group">
+        <label for="deporte">Practica algun deporte?</label>
+        <input type="text" id="deporte" name="deporte" />
+      </div>
+      <div class="field-group">
+        <label for="hobby">Pasatiempo favorito</label>
+        <input type="text" id="hobby" name="hobby" />
+      </div>
+    </fieldset>
+    <h3>Datos familiares</h3>
+    <table class="info-table">
+      <thead>
+        <tr>
+          <th>Nombres de</th>
+          <th class="check-column">Vivo</th>
+          <th class="check-column">Finado</th>
+          <th>Domicilio</th>
+          <th>Ocupación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="table-field">
+              <span>Padre:</span>
+              <input type="text" name="padre_nombre" />
+            </div>
+          </td>
+          <td class="check-column">
+            <input type="radio" name="padre_estado" value="vivo" />
+          </td>
+          <td class="check-column">
+            <input type="radio" name="padre_estado" value="finado" />
+          </td>
+          <td><input type="text" name="padre_domicilio" /></td>
+          <td><input type="text" name="padre_ocupacion" /></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="table-field">
+              <span>Madre:</span>
+              <input type="text" name="madre_nombre" />
+            </div>
+          </td>
+          <td class="check-column">
+            <input type="radio" name="madre_estado" value="vivo" />
+          </td>
+          <td class="check-column">
+            <input type="radio" name="madre_estado" value="finado" />
+          </td>
+          <td><input type="text" name="madre_domicilio" /></td>
+          <td><input type="text" name="madre_ocupacion" /></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="table-field">
+              <span>Esposa(o):</span>
+              <input type="text" name="esposa_nombre" />
+            </div>
+          </td>
+          <td class="check-column">
+            <input type="radio" name="esposa_estado" value="vivo" />
+          </td>
+          <td class="check-column">
+            <input type="radio" name="esposa_estado" value="finado" />
+          </td>
+          <td><input type="text" name="esposa_domicilio" /></td>
+          <td><input type="text" name="esposa_ocupacion" /></td>
+        </tr>
+        <tr>
+          <td colspan="3">
+            <div class="table-field">
+              <span>Nombres de los hijos:</span>
+              <input type="text" name="hijos_nombre" />
+            </div>
+          </td>
+          <td><input type="text" name="hijos_domicilio" /></td>
+          <td><input type="text" name="hijos_ocupacion" /></td>
+        </tr>
+      </tbody>
+    </table>
+    <h3>Escolaridad</h3>
+    <table class="info-table">
+      <thead>
+        <tr>
+          <th>Nombres de la escuela o instituto</th>
+          <th>Domicilio</th>
+          <th>Fecha inicio Fecha termino</th>
+          <th>Certificado que lo avala</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="field-group">
+              <label for="primaria">Primaria</label>
+              <input type="text" id="primaria" name="primaria" />
+            </div>
+          </td>
+          <td><input type="text" name="primaria_domicilio" /></td>
+          <td><input type="text" name="primaria_fecha_inicio" /></td>
+          <td><input type="text" name="primaria_certificado" /></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="field-group">
+              <label for="secundaria">Secundaria</label>
+              <input type="text" id="secundaria" name="secundaria" />
+            </div>
+          </td>
+          <td><input type="text" name="secundaria_domicilio" /></td>
+          <td><input type="text" name="secundaria_fecha_inicio" /></td>
+          <td><input type="text" name="secundaria_certificado" /></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="field-group">
+              <label for="preparatoria">Preparatoria</label>
+              <input type="text" id="preparatoria" name="preparatoria" />
+            </div>
+          </td>
+          <td><input type="text" name="preparatoria_domicilio" /></td>
+          <td><input type="text" name="preparatoria_fecha_inicio" /></td>
+          <td><input type="text" name="preparatoria_certificado" /></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="field-group">
+              <label for="profesional">Profesional</label>
+              <input type="text" id="profesional" name="profesional" />
+            </div>
+          </td>
+          <td><input type="text" name="profesional_domicilio" /></td>
+          <td><input type="text" name="profesional_fecha_inicio" /></td>
+          <td><input type="text" name="profesional_certificado" /></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="field-group">
+              <label for="comercial">Comercial</label>
+              <input type="text" id="comercial" name="comercial" />
+            </div>
+          </td>
+          <td><input type="text" name="comercial_domicilio" /></td>
+          <td><input type="text" name="comercial_fecha_inicio" /></td>
+          <td><input type="text" name="comercial_certificado" /></td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
