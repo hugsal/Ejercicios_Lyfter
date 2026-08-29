@@ -1,8 +1,13 @@
-const string = "JavaScript";
-let newString = "";
+function reverse(value) {
+  let newString = "";
 
-for (const char of string) {
-  newString = char + newString;
+  for (i = value.length - 1; i >= 0; i--) {
+    newString += value[i];
+  }
+
+  return newString;
 }
 
-console.log(newString);
+const string = "JavaScript";
+const reverseString = reverse(string);
+console.log(reverseString);

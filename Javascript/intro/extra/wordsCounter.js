@@ -1,18 +1,21 @@
-const string = "This is a test. This test is simple.";
+function wordCounter(letter) {
+  const strings = letter
+    .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()¿?¡!]/g, "")
+    .toLowerCase()
+    .split(" ");
 
-const strings = string
-  .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()¿?¡!]/g, "")
-  .toLowerCase()
-  .split(" ");
+  const counter = {};
 
-const counter = {};
-
-for (const word of strings) {
-  if (counter[word] === undefined) {
-    counter[word] = 1;
-    continue;
+  for (const word of strings) {
+    if (counter[word] === undefined) {
+      counter[word] = 1;
+      continue;
+    }
+    counter[word] = counter[word] + 1;
   }
-  counter[word] = counter[word] + 1;
+  return counter;
 }
 
+const string = "This is a test. This test is simple.";
+const counter = wordCounter(string);
 console.log(counter);
