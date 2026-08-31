@@ -5,9 +5,9 @@
     <title>List</title>
   </head>
   <body>
-    <ul id="list">
+    <ol id="list">
       <li id="list-element">Old element</li>
-    </ul>
+    </ol>
     <button id="add-element">Add element</button>
     <button id="clear-list">Clear list</button>
   </body>
@@ -25,7 +25,7 @@
 
     const clearList = () => {
       const elements = document.querySelectorAll("#list-element");
-      if (list) {
+      if (elements) {
         elements.forEach((element) => element.remove());
       }
     };

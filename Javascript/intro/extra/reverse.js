@@ -1,7 +1,7 @@
 function reverse(value) {
   let newString = "";
 
-  for (i = value.length - 1; i >= 0; i--) {
+  for (let i = value.length - 1; i >= 0; i--) {
     newString += value[i];
   }
 
