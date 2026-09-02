@@ -1,5 +1,5 @@
 function even() {
-  console.log("he number is even!");
+  console.log("The number is even!");
 }
 
 function odd() {
