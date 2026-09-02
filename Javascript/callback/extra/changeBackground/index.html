@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Background Colors</title>
+    <script src="main.js" defer></script>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 50px;
+        gap: 15px;
+      }
+
+      #square {
+        width: 150px;
+        height: 150px;
+        border: 2px solid #333;
+        background-color: #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="square"></div>
+    <button id="toggle">Cambiar color</button>
+    <p id="color-text">Color actual: ninguno</p>
+  </body>
+</html>
