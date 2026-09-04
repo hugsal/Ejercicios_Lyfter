@@ -30,7 +30,7 @@ async function loadWebsite() {
   ];
 
   for (const script of scripts) {
-    await load("Script", script.nombre, script.tiempo);
+    await load("Script", script.name, script.time);
   }
   console.log("Todos los scripts han sido cargados.");
 

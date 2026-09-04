@@ -8,7 +8,7 @@ async function request(userId) {
   return response.json();
 }
 
-let userIds = [2, 23, 4];
+let userIds = [2, 3, 4];
 
 try {
   for await (const id of userIds) {
